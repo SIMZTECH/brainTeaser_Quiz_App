@@ -1,0 +1,1 @@
+export {default as dashborad_banner} from './dashboard_banner.png';
