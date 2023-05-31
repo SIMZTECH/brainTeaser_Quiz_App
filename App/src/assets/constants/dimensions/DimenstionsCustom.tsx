@@ -5,5 +5,9 @@ import { Dimensions } from "react-native";
 
 const {height,width} = Dimensions.get('window');
 
-export default {height,width}
+const DimensionReducer=(args:number)=>{
+    return Math.round(args);
+}
+
+export default {height,width,DimensionReducer}
 
