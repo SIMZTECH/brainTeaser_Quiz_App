@@ -1,3 +1,4 @@
+/* eslint-disable jsx-quotes */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
 import { StyleSheet, Text, View } from 'react-native';
@@ -5,8 +6,10 @@ import React, { useEffect } from 'react';
 import DimenstionsCustom from '../../assets/constants/dimensions/DimenstionsCustom';
 import QuestionMarker from './QuestionMarker';
 import QuestionBox from './QuestionBox';
+import ButtonComponent from './ButtonComponent';
 
 const {height,width,DimensionReducer}=DimenstionsCustom;
+
 
 const LeadersBoardScreen = () => {
   console.log(DimensionReducer(width));
@@ -14,11 +17,30 @@ const LeadersBoardScreen = () => {
 
   const [data,setData]=React.useState([true,true,false,false]);
   const track=[true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
-  const questionsAnswers=[true,true,true,true];
-
-  // const QuestionSelector=((args:Boolean)=>{
-  //   console.log(args);
-  // });
+  const questionsAnswers=[
+    {
+    'id':'01',
+    'correct':'true',
+    'Answer':'Sir. james Banda'
+   },
+   {
+    'id':'02',
+    'correct':'false',
+    'Answer':'Dr. Emmanuel '
+   },
+   {
+    'id':'03',
+    'correct':'false',
+    'Answer':'Prof. john Banda'
+   },
+   {
+    'id':'04',
+    'correct':'false',
+    'Answer':'Dr. kelvin Lungu'
+   },
+];
+const [correctAnswer,setCorrectAnswer]=React.useState<Boolean>(false);
+const [disableBtn,setDisableBtn]=React.useState<Boolean>(false);
 
   useEffect(()=>{
 
@@ -51,25 +73,35 @@ const LeadersBoardScreen = () => {
             {
               questionsAnswers.map((value,_index)=>
                 <QuestionBox 
-                  answer={'Question 1'} 
-                  operation={((args:Boolean)=>{
-                    console.log(args);
-              })} 
-              answerStatus={value} key={_index}
-              />)
+                  answer={value}
+                  key={value.id}
+                  disableBtn={disableBtn}
+                  setDisableBtn={setDisableBtn}                
+                />)
             }
-
           </View>
       </View>
 
-      <View className={`b flex-row justify-between absolute bottom-12 w-full self-center`}>
-      <View className='b w-32 h-11  items-center justify-center rounded-md'>
-          <Text className='b text-[18px] text-white'>Quit Quiz</Text>
-        </View>
-        <View className='b w-32 h-11 bg-[#05d3f6] items-center justify-center rounded-md'>
-          <Text className='b text-[18px] text-white'>Next</Text>
-        </View>
+      <View className={'b flex-row justify-between absolute bottom-10 w-full self-center'}>
+        <ButtonComponent 
+          iconName={'power-off'}
+          text={'Quit Quiz'}
+          operation={((args: String) => { console.log(args); })}
+          bg_Color={''}
+          iconColor={'#8c8c8c'} 
+          iconSize={16}
+        />
 
+        <ButtonComponent 
+          iconName={''}
+          text={'Next'}
+          operation={((args: String) => { 
+            setDisableBtn(false);
+            console.log(args); 
+          })}
+          bg_Color={`#05d3f6`}
+          iconColor={''} 
+          iconSize={0}/>
       </View>
 
     </View>

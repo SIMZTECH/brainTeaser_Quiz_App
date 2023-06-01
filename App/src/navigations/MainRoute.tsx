@@ -17,7 +17,7 @@ const MainRoute = () => {
     }}
     
     >
-      <Stack.Screen name="HomeMenuTab" component={LeadersBoardScreen}/>
+      <Stack.Screen name="HomeMenuTab" component={ResultsScreen}/>
       <Stack.Screen name="Questions" component={QuestionsScreen}/>
       <Stack.Screen name="Results" component={ResultsScreen}/>
     </Stack.Navigator>

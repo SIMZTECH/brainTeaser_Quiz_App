@@ -6,3 +6,5 @@ export {default as language} from './language.png';
 export {default as knowledge} from './knowlegde.png';
 export {default as drama} from './drama.png';
 export {default as user} from './user.png';
+export {default as results_bgCover} from './resultsBg_brainTeaser.png';
+export {default as trophy} from './trophy_image.png';
