@@ -14,7 +14,6 @@ type propsType={
 };
 
 const ButtonComponent = ({iconName,text,operation,bg_Color,iconColor,iconSize}:propsType) => {
-    console.log(bg_Color);
   return (
       <TouchableOpacity 
       onPress={()=>operation(text)}

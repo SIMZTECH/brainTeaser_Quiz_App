@@ -9,8 +9,13 @@ import {results_bgCover,trophy } from '../../assets/images';
 import ResultsBtnComponent from './ResultsBtnComponent';
 
 const {height,width,DimensionReducer}=DimenstionsCustom;
+type propsType={
+  route:any,
+  navigation:any
+}
 
-const ResultsScreen = () => {
+const ResultsScreen = ({route,navigation}:propsType) => {
+  const {totalQuestions}=route.params;
   const WIDTH=DimensionReducer(width);
   const HEIGHT=DimensionReducer(height);
 
@@ -22,6 +27,7 @@ const ResultsScreen = () => {
       Alert.alert('Warning!',`am redirecting to ${args}`);
     }
   });
+  console.log(totalQuestions);
 
   return (
     <View
@@ -46,7 +52,7 @@ const ResultsScreen = () => {
             <View className='items-center'>
               <Text className='b text-[#717171] text-[19px]'>YOUR SCORE</Text>
               <Text>
-                <Text className='b text-green-600 font-medium text-[32px]'>{20}</Text><Text className='b text-white font-medium text-[32px]'>/{20}</Text>
+                <Text className='b text-green-600 font-medium text-[32px]'>{20}</Text><Text className='b text-white font-medium text-[32px]'>/{totalQuestions}</Text>
               </Text>
             </View>
             <View className='b items-center'>

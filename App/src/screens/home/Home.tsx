@@ -16,8 +16,37 @@ import Subject from './Subject';
 const {lightBlack,lightBlue,white,black,darkBlue}=Color_Scheme;
 const {height,width}=DimenstionsCustom;
 
-const Home = () => {
-    console.log(lightBlue);
+type propsType={
+  navigation:any,
+}
+
+const Home = ({navigation}:propsType) => {
+  const HandleNavigate=(route:String,data:String)=>{
+    navigation.navigate(route,{title:data});
+  };
+
+  const HandleOnpressQuestionOption=((args:String)=>{
+    switch (args) {
+      case 'Mathematics':
+        HandleNavigate('Questions',args);
+        break
+      case 'Science':
+        HandleNavigate('Questions',args);
+        break
+      case 'Drama':
+        HandleNavigate('Questions',args);
+        break
+      case 'Art & Design':
+        HandleNavigate('Questions',args);
+        break
+        case 'Knowledge':
+          HandleNavigate('Questions',args);
+        break
+      case 'Language':
+        HandleNavigate('Questions',args);
+        break
+    }
+  });
   return (
     <View style={styles.Container}>
         <View className={`flex-1 bg-[#edf4f6]`}>
@@ -44,54 +73,40 @@ const Home = () => {
                 <View
                 className='b flex-wrap flex-row justify-between mt-5'
                 >
-                  {/* subject selection */}
                   <Subject 
                     icon={mathematics} 
                     text={"Mathematics"} 
-                    operation={((args:String)=>{
-                      console.log(args);
-                    })} />
-
+                    operation={HandleOnpressQuestionOption} 
+                  />
                   <Subject 
                     icon={science} 
                     text={"Science"} 
-                    operation={((args:String)=>{
-                      console.log(args);
-                    })} />
-
+                    operation={HandleOnpressQuestionOption} 
+                  />
                   <Subject 
                     icon={drama} 
                     text={"Drama"} 
-                    operation={((args:String)=>{
-                      console.log(args);
-                    })} />
-
+                    operation={HandleOnpressQuestionOption} 
+                  />
                   <Subject 
                     icon={art} 
                     text={"Art & Design"} 
-                    operation={((args:String)=>{
-                      console.log(args);
-                    })} />
-
+                    operation={HandleOnpressQuestionOption} 
+                  />
                   <Subject 
                     icon={knowledge} 
                     text={"Knowledge"} 
-                    operation={((args:String)=>{
-                      console.log(args);
-                    })} />
-                  
+                    operation={HandleOnpressQuestionOption} 
+                  />
                   <Subject 
                     icon={language} 
                     text={"Language"} 
-                    operation={((args:String)=>{
-                      console.log(args);
-                    })} />
+                    operation={HandleOnpressQuestionOption} />
                 </View>
               </View>
         </View>
-
     </View>
-  )
+  );
 }
 
 export default Home;

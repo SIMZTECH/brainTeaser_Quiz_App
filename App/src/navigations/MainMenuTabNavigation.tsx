@@ -4,7 +4,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../screens/home/Home';
 import NotificationScreen from '../screens/notifications/NotificationScreen';
-import LeadersBoardScreen from '../screens/leaders/LeadersBoardScreen';
+import LeadersBoadScreen from '../screens/leadersBoard/LeadersBoadScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
@@ -29,7 +29,7 @@ const MainMenuTabNavigation = () => {
     >
       <Tab.Screen name='Home' component={Home}/>
       <Tab.Screen name='Notifications' component={NotificationScreen}/>
-      <Tab.Screen name='LeadersBoard' component={LeadersBoardScreen}/>
+      <Tab.Screen name='LeadersBoard' component={LeadersBoadScreen}/>
     </Tab.Navigator>
   )
 }
