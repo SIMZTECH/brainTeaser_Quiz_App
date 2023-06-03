@@ -9,35 +9,50 @@ type propsType={
     answer:any,
     disableBtn:any,
     setDisableBtn:any,
+    retrivedAPIData:any,
+    setScore:any,
+    setCounter:any
+    counter:number
+    getQuestionOptionsAndShuffle:any,
+    setQuestionOptions:any,
+    allData:any,
+    markerOperation:(args:Boolean)=>void,
 };
 
-const QuestionBox = ({answer,setDisableBtn,disableBtn}:propsType) => {
+const QuestionBox = ({answer,setDisableBtn,disableBtn,retrivedAPIData,markerOperation,setCounter,counter,getQuestionOptionsAndShuffle,setQuestionOptions,allData}:propsType) => {
     const WIDTH=DimensionReducer(width);
     const [mark,setMark]=useState<String>('');
-    const [remover,setRemover]=useState<Boolean>(false);
+    
+    const checkMatchAnswer=()=>{
+        if(retrivedAPIData.correct_answer===answer){
+            setMark('true');
+            markerOperation(true);
+        }else{
+            setMark('false');
+            markerOperation(false);
+        }
+    };
 
-
-    useEffect(()=>{
-
-
-
+    const resetInitials=()=>{
         setTimeout(() => {
-            setRemover(false);
-        },2000);
-    });
-
+                setMark('');
+                setCounter(counter + 1);
+                setQuestionOptions(getQuestionOptionsAndShuffle(allData[counter + 1]));
+                setDisableBtn(false);
+        }, 1000);
+    };
 
   return (
       <TouchableOpacity
           onPress={(()=>{
-            console.log(answer.correct);
-            setMark(answer.correct);
-            setDisableBtn(true);
-            setRemover(true);
+                  setMark(answer);
+                  setDisableBtn(true);
+                  resetInitials();
+                  checkMatchAnswer();
         })}
           disabled={disableBtn}
           className={`w-[${WIDTH}px] h-[50px]  mb-2 mt-2 pb-3 pt-3 items-center flex-row px-2 rounded-xl space-x-2 border-[1.5px] ${mark==='true'?'border-green-700':`${mark==='false'?'border-red-700':'border-gray-500'}`} `}>
-          <Text className='b text-[16px] flex-1 text-white'>{answer.Answer}</Text>
+          <Text className='b text-[16px] flex-1 text-white'>{decodeURIComponent(answer)}</Text>
           {(mark==='true') &&  
             <View className={`b w-[24px] h-[24px] rounded-full border-[1px] border-green-700 items-center justify-center bg-green-700`}>
                 <Ionicons name='checkmark-sharp' size={20} color={'white'}/>

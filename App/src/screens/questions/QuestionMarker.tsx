@@ -11,7 +11,7 @@ const {height,width,DimensionReducer}=DimenstionsCustom;
 type propsTypes={
     questionstotal:number,
     status:Boolean,
-    data:any,
+    data:Boolean[],
     elementIndex:number,
 }
 

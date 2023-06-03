@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Alert, Image, Pressable, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import DimenstionsCustom from '../../assets/constants/dimensions/DimenstionsCustom';
 import { Color_Scheme } from '../../assets/constants/color_sheme/Color_Scheme';
 import { 
@@ -21,6 +21,7 @@ type propsType={
 }
 
 const Home = ({navigation}:propsType) => {
+
   const HandleNavigate=(route:String,data:String)=>{
     navigation.navigate(route,{title:data});
   };
