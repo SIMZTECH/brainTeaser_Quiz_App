@@ -28,7 +28,6 @@ const track=[true,true,true,true,true,true,true,true,true,true,true,true,true,tr
 const [correctAnswer,setCorrectAnswer]=React.useState<Boolean>(false);
 const [disableBtn,setDisableBtn]=React.useState<Boolean>(false);
 const [counter,setCounter]=React.useState<number>(0);
-const [score,setScore]=React.useState<number>(0);
 const [retrivedAPIData,setRetrivedAPIData]=React.useState([]);
 const [questionOptions,setQuestionOptions]=React.useState([]);
 
@@ -45,6 +44,18 @@ const HandleOnPressedQuitQuiz=((args:String)=>{
   }
 });
 
+const GenerateScores=()=>{
+  let score=0;
+  for(let i=0;i<marksDisplay.length;i++){
+    console.log(marksDisplay[i]);
+    if(marksDisplay[i]==true){
+      score=score+1;
+    }
+  };
+
+  return score;
+};
+
 const getQuestionOptionsAndShuffle=useCallback((_object:any)=>{
   const copyOptions = [..._object.incorrect_answers];
   copyOptions.push(_object.correct_answer);
@@ -53,15 +64,17 @@ const getQuestionOptionsAndShuffle=useCallback((_object:any)=>{
 },[]);
 
 const HandleOnPressedNext=((args:String)=>{
-  if(args=='Next'){
-    let total=counter+1;
-    if(total<20){
+  if(args=='Skip'){
+    marksDisplay.push(false);
+    if(counter!=19){
       setCounter(counter+1);
-      setQuestionOptions(getQuestionOptionsAndShuffle(retrivedAPIData[counter+1]));
-    }else{
-      navigation.navigate('Results',{totalQuestions:total});
-    }
+      setQuestionOptions(getQuestionOptionsAndShuffle(retrivedAPIData[counter+1]));      
+    };
+  }else if(args=='Show Results'){
+    const scores=GenerateScores();
+    navigation.navigate('Results',{score:scores});
   }
+
 });
 
 const handlePreventGoBack=useCallback(()=>{
@@ -108,9 +121,6 @@ const markerOperation=((args:Boolean)=>{
    
   },[GetQuizeQuestions, handlePreventGoBack]);
 
-  // console.log(retrivedAPIData[counter]);
-  console.log(marksDisplay);
-
   return (
     <>
     {(retrivedAPIData.length>0)?(
@@ -142,7 +152,6 @@ const markerOperation=((args:Boolean)=>{
                     disableBtn={disableBtn}
                     setDisableBtn={setDisableBtn} 
                     retrivedAPIData={retrivedAPIData[counter]} 
-                    setScore={setScore} 
                     setCounter={setCounter} 
                     counter={counter} 
                     getQuestionOptionsAndShuffle={getQuestionOptionsAndShuffle} 
@@ -166,7 +175,7 @@ const markerOperation=((args:Boolean)=>{
   
           <ButtonComponent 
             iconName={''}
-            text={'Next'}
+            text={counter!=19?'Skip':'Show Results'}
             operation={HandleOnPressedNext}
             bg_Color={`#05d3f6`}
             iconColor={''} 

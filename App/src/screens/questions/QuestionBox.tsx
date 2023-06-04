@@ -10,7 +10,6 @@ type propsType={
     disableBtn:any,
     setDisableBtn:any,
     retrivedAPIData:any,
-    setScore:any,
     setCounter:any
     counter:number
     getQuestionOptionsAndShuffle:any,
@@ -36,9 +35,13 @@ const QuestionBox = ({answer,setDisableBtn,disableBtn,retrivedAPIData,markerOper
     const resetInitials=()=>{
         setTimeout(() => {
                 setMark('');
-                setCounter(counter + 1);
-                setQuestionOptions(getQuestionOptionsAndShuffle(allData[counter + 1]));
                 setDisableBtn(false);
+                if(counter!=19){
+                    setCounter(counter+1);
+                    setQuestionOptions(getQuestionOptionsAndShuffle(allData[counter+1]));
+                }else{
+                    console.log('reached 19');
+                }
         }, 1000);
     };
 
@@ -65,7 +68,7 @@ const QuestionBox = ({answer,setDisableBtn,disableBtn,retrivedAPIData,markerOper
           }
           {(mark=='') &&  <View className={`b w-[24px] h-[24px] rounded-full border-[1px] border-gray-500 items-center justify-center`}></View>}
       </TouchableOpacity>
-  )
+  );
 }
 
 export default QuestionBox;

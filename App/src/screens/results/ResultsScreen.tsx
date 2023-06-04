@@ -15,7 +15,7 @@ type propsType={
 }
 
 const ResultsScreen = ({route,navigation}:propsType) => {
-  const {totalQuestions}=route.params;
+  const {score}=route.params;
   const WIDTH=DimensionReducer(width);
   const HEIGHT=DimensionReducer(height);
 
@@ -27,7 +27,8 @@ const ResultsScreen = ({route,navigation}:propsType) => {
       Alert.alert('Warning!',`am redirecting to ${args}`);
     }
   });
-  console.log(totalQuestions);
+
+  console.log(score);
 
   return (
     <View
@@ -52,14 +53,14 @@ const ResultsScreen = ({route,navigation}:propsType) => {
             <View className='items-center'>
               <Text className='b text-[#717171] text-[19px]'>YOUR SCORE</Text>
               <Text>
-                <Text className='b text-green-600 font-medium text-[32px]'>{20}</Text><Text className='b text-white font-medium text-[32px]'>/{totalQuestions}</Text>
+                <Text className='b text-green-600 font-medium text-[32px]'>{score/20*100}%</Text><Text className='b text-white font-medium text-[32px]'>/{20/20*100}</Text>
               </Text>
             </View>
             <View className='b items-center'>
               <Text className='text-[#717171] text-[18px]'>EARNINGS COINS</Text>
               <View className='b flex-row items-center space-x-3'>
                 <FontAwesome5 name='coins' size={24} color={'gold'} />
-                <Text className='text-[30px] text-white font-medium'>500</Text>
+                <Text className='text-[30px] text-white font-medium'>{score*50}</Text>
               </View>
             </View>
           </View>
