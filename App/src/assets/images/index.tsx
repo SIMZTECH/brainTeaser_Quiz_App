@@ -8,3 +8,8 @@ export {default as drama} from './drama.png';
 export {default as user} from './user.png';
 export {default as results_bgCover} from './resultsBg_brainTeaser.png';
 export {default as trophy} from './trophy_image.png';
+export {default as politics} from './politics.png';
+export {default as history} from './history.png';
+export {default as sports} from './sports.png';
+export {default as geography} from './geography.png';
+export {default as computers} from './computers.png';

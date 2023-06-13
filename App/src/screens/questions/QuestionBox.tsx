@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import DimenstionsCustom from '../../assets/constants/dimensions/DimenstionsCustom';
 const {height,width,DimensionReducer}=DimenstionsCustom;
@@ -15,20 +15,23 @@ type propsType={
     getQuestionOptionsAndShuffle:any,
     setQuestionOptions:any,
     allData:any,
+    setKey:any
     markerOperation:(args:Boolean)=>void,
 };
 
-const QuestionBox = ({answer,setDisableBtn,disableBtn,retrivedAPIData,markerOperation,setCounter,counter,getQuestionOptionsAndShuffle,setQuestionOptions,allData}:propsType) => {
+const QuestionBox = ({answer,setDisableBtn,disableBtn,retrivedAPIData,markerOperation,setCounter,counter,getQuestionOptionsAndShuffle,setQuestionOptions,allData,setKey}:propsType) => {
     const WIDTH=DimensionReducer(width);
     const [mark,setMark]=useState<String>('');
     
     const checkMatchAnswer=()=>{
-        if(retrivedAPIData.correct_answer===answer){
+        if (retrivedAPIData.correct_answer===answer){
             setMark('true');
             markerOperation(true);
-        }else{
+            setKey((prevState:any)=>prevState+1);
+        } else{
             setMark('false');
             markerOperation(false);
+            setKey((prevState:any)=>prevState+1);
         }
     };
 
@@ -36,13 +39,13 @@ const QuestionBox = ({answer,setDisableBtn,disableBtn,retrivedAPIData,markerOper
         setTimeout(() => {
                 setMark('');
                 setDisableBtn(false);
-                if(counter!=19){
-                    setCounter(counter+1);
+                if (counter!=19){
+                    setCounter((prevState:any)=>prevState+1);
                     setQuestionOptions(getQuestionOptionsAndShuffle(allData[counter+1]));
-                }else{
+                } else{
                     console.log('reached 19');
                 }
-        }, 1000);
+        },200);
     };
 
   return (
