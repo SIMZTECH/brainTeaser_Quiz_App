@@ -36,7 +36,45 @@ const [disableBtn,setDisableBtn]=React.useState<Boolean>(false);
 const [counter,setCounter]=React.useState<number>(0);
 const [retrivedAPIData,setRetrivedAPIData]=React.useState<any[]>([]);
 const [questionOptions,setQuestionOptions]=React.useState<any[]>([]);
+const [difficultLevel, setDifficultLevel] = React.useState('medium');
+const [questionsRetrieveError, setQuestionsRetrieveError] = React.useState('');
 const [key, setKey] = React.useState(0);
+
+const QuestionsCategorySpecifier=(_title:string)=>{
+  let questionID:number=0;
+  switch (_title) {
+    case 'Computers':
+      questionID=18;
+      break
+    case 'History':
+      questionID=23;
+      break
+    case 'Gen Knowledge':
+      questionID=9;
+      break
+    case 'Politics':
+      questionID=24;
+      break
+    case 'Sports':
+      questionID=21;
+      break
+    case 'Celebrities':
+      questionID=26;
+      break
+    case 'Geography':
+      questionID=22;
+      break
+    case 'Science & Nature':
+      questionID=17;
+      break
+    case 'Animals':
+      questionID=27;
+      break
+  };
+
+  return questionID;
+
+};
 
 const shuffleArray=(array:any)=>{
   for (let i = array.length - 1; i > 0; i--) {
@@ -90,12 +128,15 @@ const HandleOnPressedNext = ((args:String)=>{
 });
 
 const GetQuizeQuestions=useCallback(async()=>{
-  GetQuestions()
+  GetQuestions(QuestionsCategorySpecifier(title),difficultLevel)
   .then((value:any)=>{
     if (!(retrivedAPIData.length > 0)){
       setRetrivedAPIData(value);
       setQuestionOptions(getQuestionOptionsAndShuffle(value[0]));
     } 
+  })
+  .catch((error)=>{
+    setQuestionsRetrieveError(error)
   });
 
 },[GetQuestions, getQuestionOptionsAndShuffle, retrivedAPIData.length]);
@@ -137,7 +178,9 @@ const remainTimer=({remainingTime}:propsType)=>{
     GetQuizeQuestions();
 
   },[GetQuizeQuestions]);
-  console.log("length:",marksDisplay.length);
+  // console.log("length:",marksDisplay.length);
+  // console.log("QuestionID:",QuestionsCategorySpecifier(title));
+  console.log("error:",questionsRetrieveError);
 
   return (
     <>

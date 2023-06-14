@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable space-infix-ops */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { science,language,mathematics,art,geography,history,politics,sports,computers} from "../../assets/images";
+import { science,language,geography,history,politics,sports,computers,animals,celebrities} from "../../assets/images";
 
 type questionCardModel={
     id:String,
@@ -12,8 +12,8 @@ type questionCardModel={
 const cardDataFeed: questionCardModel[] = [
     {
         id: '01',
-        icon:mathematics,
-        text: 'Mathematics',
+        icon:animals,
+        text: 'Animals',
     },
     {
         id: '02',
@@ -27,8 +27,8 @@ const cardDataFeed: questionCardModel[] = [
     },
     {
         id: '04',
-        icon:art,
-        text: 'Art & Design',
+        icon:celebrities,
+        text: 'Celebrities',
     },
     {
         id: '05',
@@ -38,7 +38,7 @@ const cardDataFeed: questionCardModel[] = [
     {
         id: '06',
         icon:language,
-        text: 'Language',
+        text: 'Gen Knowledge',
     },
     {
         id: '07',

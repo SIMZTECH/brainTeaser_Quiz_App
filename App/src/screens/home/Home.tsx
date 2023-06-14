@@ -23,7 +23,7 @@ const Home = ({navigation}:propsType) => {
 
   const HandleOnpressQuestionOption=((args:String)=>{
     switch (args) {
-      case 'Mathematics':
+      case 'Animals':
         console.log(args);
         HandleNavigate('Questions',args);
         break
@@ -35,7 +35,7 @@ const Home = ({navigation}:propsType) => {
         HandleNavigate('Questions',args);
         console.log(args);
         break
-      case 'Art & Design':
+      case 'Celebrities':
         HandleNavigate('Questions',args);
         console.log(args);
         break
@@ -47,7 +47,7 @@ const Home = ({navigation}:propsType) => {
         HandleNavigate('Questions',args);
         console.log(args);
         break
-      case 'Language':
+      case 'Gen Knowledge':
         HandleNavigate('Questions',args);
         console.log(args);
         break
