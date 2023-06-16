@@ -15,6 +15,7 @@ export {default as geography} from './geography.png';
 export {default as computers} from './computers.png';
 export {default as animals} from './animals.png';
 export {default as celebrities} from './celebrities.png';
+export {default as lose} from './resultsBg_lose.png';
 
 
 
