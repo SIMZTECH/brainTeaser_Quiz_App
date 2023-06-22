@@ -1,12 +1,15 @@
 /* eslint-disable prettier/prettier */
 import { Alert, Image, Pressable,StyleSheet, Text, View } from 'react-native';
-import React, { useEffect } from 'react';
+import React, {useEffect } from 'react';
 import DimenstionsCustom from '../../assets/constants/dimensions/DimenstionsCustom';
 import { Color_Scheme } from '../../assets/constants/color_sheme/Color_Scheme';
 import {cardDataFeed,questionCardModel} from './cardDataFeed';
 import { 
   dashborad_banner,user} from '../../assets/images';
 import Subject from './Subject';
+import * as Animatable from 'react-native-animatable';
+import ModalCustom from './ModalCustom';
+
 
 const {lightBlack,lightBlue,white,black,darkBlue}=Color_Scheme;
 const {height,width}=DimenstionsCustom;
@@ -16,6 +19,7 @@ type propsType={
 }
 
 const Home = ({navigation}:propsType) => {
+  const [modalVisible,setModalVisible]=React.useState(false);
 
   const HandleNavigate=(route:String,data:String)=>{
     navigation.navigate(route,{title:data});
@@ -61,8 +65,34 @@ const Home = ({navigation}:propsType) => {
         break
     }
   });
+
+  const handleCloseModal=((args:boolean)=>{
+      if(args){
+        setModalVisible(false);
+      }
+  });
+
+  const showModalOnLoadEvent =() => {
+    // load the modal after booting
+    setTimeout(() => {
+      setModalVisible(true);
+
+    }, 10000); //10s
+  };
+
+useEffect(()=>{
+
+  // execute the method to show Modal
+  showModalOnLoadEvent();
+},[]);
+
+
+console.log("status:"+modalVisible);
+
   return (
-    <View style={styles.Container}>
+    <View 
+    className='b relative'
+    style={styles.Container}>
       <View className={`flex-1 bg-[#edf4f6]`}>
         <View className='b w-full h-[180px] bg-[#292b31] rounded-b-xl relative px-4 '>
           <View className='flex-row items-center mt-[20px] space-x-4'>
@@ -72,26 +102,29 @@ const Home = ({navigation}:propsType) => {
             <Text className='b text-white'>John Lungu</Text>
           </View>
         </View>
-        <View className='w-[90%] h-[180px] bg-blue-300 rounded-md self-center -mt-24'>
+        <Animatable.View animation={'rubberBand'}  easing="ease-out" iterationCount={10}
+        className='w-[90%] h-[180px] bg-blue-300 rounded-md self-center -mt-24'>
           <Image source={dashborad_banner} className='w-full h-full rounded-md' />
-        </View>
+        </Animatable.View >
         <View className='b px-4 mt-8'>
           <View className='b flex-row justify-between'>
             <Text className='b text-black text-[16px] font-medium'>Top Quiz Categories</Text>
             <Pressable
               onPress={() => Alert.alert("Make selection")}
               className='px-2 bg-[#c4eef5ae] rounded-sm'>
-              <Text className='b text-[#05d3f6] font-semibold '>View All</Text>
+              <Text className='text-[#05d3f6] font-semibold '>View All</Text>
             </Pressable>
           </View>
-          <View
-            className='b flex-wrap flex-row justify-between mt-8'
-          >
+          <View className='flex-wrap flex-row justify-between mt-8'>
             {
               cardDataFeed.map((_value: questionCardModel, _index) => <Subject icon={_value.icon} text={_value.text} operation={HandleOnpressQuestionOption} key={_index} />)
             }
           </View>
         </View>
+      </View>
+      {/* modal */}
+      <View className='flex-1'>
+        <ModalCustom modalStatus={modalVisible} operation={handleCloseModal} />
       </View>
     </View>
   );

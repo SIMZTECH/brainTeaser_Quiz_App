@@ -19,6 +19,7 @@ import APICollector from '../../assets/APIs/QuestionsApis';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
 
+
 const {height,width,DimensionReducer}=DimenstionsCustom;
 
 type propsType={
@@ -133,10 +134,11 @@ const GetQuizeQuestions=useCallback(async()=>{
     if (!(retrivedAPIData.length > 0)){
       setRetrivedAPIData(value);
       setQuestionOptions(getQuestionOptionsAndShuffle(value[0]));
+      setQuestionsRetrieveError('false')
     } 
   })
   .catch((error)=>{
-    setQuestionsRetrieveError(error)
+    setQuestionsRetrieveError('true')
   });
 
 },[GetQuestions, getQuestionOptionsAndShuffle, retrivedAPIData.length]);
@@ -279,6 +281,15 @@ const remainTimer=({remainingTime}:propsType)=>{
         <ActivityIndicator color={'#05d3f6'} size={35}/>
       </View>
     ) }
+
+    {/* check if error exist  */}
+    {(questionsRetrieveError=='true') &&
+      <View style={styles.Container} className='b flex-1 bg-[#141933] px-5 pt-10 relative items-center'>
+        <Text className='b text-[20px] text-white text-center'> Oops!!! :) </Text>
+        <Text className='b text-[17px] text-white text-center'> Check network connection.....</Text>
+      </View>
+    }
+
     </>
   );
 }

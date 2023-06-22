@@ -16,6 +16,8 @@ export {default as computers} from './computers.png';
 export {default as animals} from './animals.png';
 export {default as celebrities} from './celebrities.png';
 export {default as lose} from './resultsBg_lose.png';
+export {default as giftBox} from './giftWrap.png';
+export {default as graduationHat} from './graduation.png';
 
 
 
